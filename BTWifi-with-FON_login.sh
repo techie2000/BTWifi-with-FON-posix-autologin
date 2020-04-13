@@ -6,7 +6,7 @@ RELOG_PASSW="<pass>"
 
 #FUNCTION TO CONNECT
 connect_to_wifi () {
-  IS_LOGGED_IN=$(wget "https://www.btwifi.com:8443/home" --no-check-certificate --timeout 30 -O - 2>/dev/null | grep "now logged in")
+  IS_LOGGED_IN=$(wget "https://www.btwifi.com:8443/home" --no-check-certificate --timeout 15 -O - 2>/dev/null | grep "now logged in")
 
   if [ "$IS_LOGGED_IN" ]
 
@@ -17,7 +17,7 @@ connect_to_wifi () {
   else
     $DBG && echo "You're not logged in... will log in now!"
     $DBG && logger -t "logon_fon" "You're not logged in... will log in now!"
-    OUT=$(wget -qO - --no-check-certificate --post-data "provider=btoz& username=$RELOG_UNAME&password=$RELOG_PASSW" "https://www.btwifi.com:8443/home")
+    OUT=$(wget -qO - --no-check-certificate --post-data "provider=tbb& username=$RELOG_UNAME&password=$RELOG_PASSW" "https://www.btwifi.com:8443/home")
     ONLINE=$(echo "$OUT" | grep "now logged on" )
     if [ "$ONLINE" ]
     then
