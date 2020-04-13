@@ -1,5 +1,5 @@
 # BTWifi-with-FON-posix-autologin
-A posix compliant sh script to autologin to BTWifi-with-FON instead of having to constantly enter user/pw details.  
+A posix compliant (?) sh script to autologin to BTWifi-with-FON instead of having to constantly enter user/pw details.  
 
 This was put together by me based on https://gist.github.com/sscarduzio/05ed0b41d6234530d724#gistcomment-3212135 which detailed a bash script to do similar for btopenzone, and designed for use on a GL-AR750S-730 running OpenWRT when I'm visiting various locations that need more data than I reasonably have available through my phone's monile hotspot.  
 
@@ -20,3 +20,15 @@ and extend the
 *  supportedssid
 
 rows as needed to detail the specifics of your SSID
+
+I run cron to perform checks/restart every 5mins, and to run regular ping in an attempt to keep the connection open.
+
+> crontab -e 
+
+This will open /etc/crontabs/root file in vi where you can add something like
+
+> #### Check we are connected to BTWifi-with_FON every 5mins and reconnect if not
+> */5 * * * * /usr/share/scripts/BTWifi-with-FON_login.sh
+> 
+> #### Run a ping every minute for 5secs in an attempt to prevent BTWifi-with-FON from disconnecting
+> */1 * * * * /bin/ping -w 5 www.google.com
