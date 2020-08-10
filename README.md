@@ -25,7 +25,7 @@ I choose to create a `scripts` folder under `/usr/share/` and put the main scrip
 
 Note, if you are running this on a virgin device, you will need to turn-off 'DNS Rebinding Attack Protection' which is on by default - this can be found under `More Settings / Custom DNS Server`
 
-I run cron to perform checks/restart every 5mins, and to run regular ping in an attempt to keep the connection open. Note, I think they BT force a disconnect every 2hours and so you are fored to reconnect.
+I run cron to perform checks/restart every 5mins, and to run regular ping in an attempt to keep the connection open. Note, I think they BT force a disconnect every 2hours and so you are forced to reconnect.
 
 > crontab -e 
 
