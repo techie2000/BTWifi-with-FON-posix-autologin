@@ -6,7 +6,7 @@ RELOG_PASSW="<pass>"
 
 #FUNCTION TO CONNECT
 am_i_connected_to_wifi () {
-  IS_LOGGED_IN=$(wget "https://www.btopenzone.com:8443/home" --no-check-certificate --timeout 15 -O - 2>/dev/null | grep "now logged in")
+  IS_LOGGED_IN=$(wget "https://www.btwifi.com:8443/home" --no-check-certificate --timeout 15 -O - 2>/dev/null | grep "now logged in")
 
   if [ "$IS_LOGGED_IN" ]
 
@@ -22,9 +22,8 @@ am_i_connected_to_wifi () {
 
 connect_to_wifi () {
     $DBG && logger -t "logon_fon" "You're not logged in... will log in now!"
-    #OUT=$(wget -O - --no-check-certificate --post-data "provider=btoz&username=$RELOG_UNAME&password=$RELOG_PASSW" "https://www.btopenzone.com:8443/tbbLogon")
     curl 'https://www.btwifi.com:8443/tbbLogon' -d "username=$RELOG_UNAME&password=$RELOG_PASSW"
-    ONLINE=$(wget "https://www.btopenzone.com:8443/home" --no-check-certificate --timeout 15 -O - 2>/dev/null | grep "now logged in")
+    ONLINE=$(wget "https://www.btwifi.com:8443/home" --no-check-certificate --timeout 15 -O - 2>/dev/null | grep "now logged in")
     if [ "$ONLINE" ]
     then
       $DBG && echo "You're online!"
@@ -39,7 +38,7 @@ connect_to_wifi () {
 myssid=$(iw dev wlan1 info | grep ssid)
 #sh doesn't support arrays, so simulate an ARRAY CONTAINING SUPPORTED WIFI NETWORKS
 supportedssid=""
-supportedssid="$supportedssid BTWifi-with-FON"
+supportedssid="$supportedssid BTWifi-with-FON" #don't think they use this since dropping the btopenzone branding
 supportedssid="$supportedssid BTWi-fi"
 supportedssid="$supportedssid GL-AR750S-730"
 
