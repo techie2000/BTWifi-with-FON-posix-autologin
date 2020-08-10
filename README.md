@@ -1,5 +1,5 @@
 # BTWifi-with-FON-posix-autologin
-A posix compliant (?) sh script to autologin to BTWifi-with-FON instead of having to constantly enter user/pw details.  
+A posix compliant (?) sh script to autologin to BTWifi-with-FON instead of having to constantly enter user/pw details. 
 
 This was put together by me based on https://gist.github.com/sscarduzio/05ed0b41d6234530d724#gistcomment-3212135 which detailed a bash script to do similar for btopenzone, and has been designed for use on a GL-AR750S-730 running OpenWRT when I'm visiting various locations that need more data than I reasonably have available through my phone's mobile data hotspot.  
 
@@ -20,6 +20,10 @@ and extend the
 *  supportedssid
 
 rows as needed to detail the specifics of your SSID
+
+I choose to create a `scripts` folder under `/usr/share/` and put the main script in there.
+
+Note, if you are running this on a virgin device, you will need to turn-off 'DNS Rebinding Attack Protection' which is on by default - this can be found under `More Settings / Custom DNS Server`
 
 I run cron to perform checks/restart every 5mins, and to run regular ping in an attempt to keep the connection open. Note, I think they BT force a disconnect every 2hours and so you are fored to reconnect.
 
